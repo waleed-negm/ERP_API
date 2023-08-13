@@ -1,0 +1,11 @@
+﻿namespace Application.BusinessLogic.PurchasesModule.ViewModel.ReturnBack
+{
+	public class PurchaseStoreTransactions
+	{
+		public int StoreItemId { get; set; }
+		public string StoreItemName { get; set; }
+		public decimal QTY { get; set; }
+		public decimal UnitPrice { get; set; }
+		public decimal ReturnedQTY { get; set; }
+	}
+}
