@@ -1,18 +1,20 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using Domain.Entities.common;
 
-namespace Application.BusinessLogic.CurrentAssetModules.Inventory.Model.Main
+namespace Domain.Entities
 {
-	[Table("Finance_CurrentAsset_Inventory_Main_StoreItemWithSN")]
-
-	public class StoreItemWithSN
+	public class StoreItemWithSN : BaseModel
 	{
-		public int Id { get; set; }
-		public int StoreItemId { get; set; }
+		public long StoreItemId { get; set; }
+
 		[ForeignKey("StoreItemId")]
 		public StoreItem StoreItem { get; set; }
-		public int TransactionId { get; set; }
+
+		public long TransactionId { get; set; }
+
 		[ForeignKey("TransactionId")]
 		public StoreTransaction StoreTransaction { get; set; }
+
 		public string SerialNumber { get; set; }
 	}
 }

@@ -1,12 +1,10 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using Domain.Entities.common;
 
-namespace Application.BusinessLogic.ERPSettings.Model
+namespace Domain.Entities
 {
-	[Table("Finance_Settings_Branch")]
-	public class Branch
+	public class Branch : BaseModel
 	{
-		public int Id { get; set; }
 		[Required, StringLength(255)]
 		public string BranchName { get; set; }
 	}

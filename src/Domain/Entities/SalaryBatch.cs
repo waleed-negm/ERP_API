@@ -1,13 +1,13 @@
-using System.ComponentModel.DataAnnotations.Schema;
+using Domain.Entities.common;
 
 namespace Domain.Entities
 {
-	[Table("HR_SalaryBatch")]
-	public class SalaryBatch
+	public class SalaryBatch : BaseModel
 	{
-		public int Id { get; set; }
 		public int BatchMonth { get; set; }
+
 		public int BatchYear { get; set; }
-		public string TransId { get; set; }
+
+		public string? TransId { get; set; }
 	}
 }

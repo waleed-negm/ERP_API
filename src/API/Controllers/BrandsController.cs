@@ -1,4 +1,4 @@
-using Application.BusinessLogic.CurrentAssetModules.Inventory.Model.Settings;
+using Domain.Entities;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -105,7 +105,7 @@ namespace API.Controllers
 			return Ok(brand);
 		}
 
-		private bool BrandExists(int id)
+		private bool BrandExists(long id)
 		{
 			return _context.Brands.Any(e => e.Id == id);
 		}

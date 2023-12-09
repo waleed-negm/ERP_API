@@ -1,11 +1,9 @@
-using Application.BusinessLogic.CRM.Model;
-using Application.BusinessLogic.CurrentAssetModules.Inventory.Model.Main;
-using Application.BusinessLogic.ERPSettings.Model;
 using Application.BusinessLogic.GeneralLedgerModule.JournalModeule.Interfaces;
 using Application.BusinessLogic.GeneralLedgerModule.JournalModeule.ViewModel;
 using Application.BusinessLogic.SalesModule.ViewModel;
 using Application.BusinessLogic.SalesModule.ViewModel.Payment;
 using Application.Common.Interfaces;
+using Domain.Entities;
 using Domain.Enums;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Http;
@@ -68,7 +66,7 @@ namespace Application.BusinessLogic.SalesModule.Service
 			return TransId;
 		}
 
-		public void PurchaseJournal(SalesContainer vm, string InvoiceNum)
+		public void PurchaseJournal(SalesContainer vm, long InvoiceNum)
 		{
 			var journal = new JournalVM();
 			var Currency = _db.Currency.Find(vm.SalesSummary.CurrencyId);
@@ -81,7 +79,7 @@ namespace Application.BusinessLogic.SalesModule.Service
 
 
 
-		public List<JournalDetailsVM> PurchaseJournalDetails(SalesContainer vm, Currency Currency, string InvoiceNum)
+		public List<JournalDetailsVM> PurchaseJournalDetails(SalesContainer vm, Currency Currency, long InvoiceNum)
 		{
 			var JDs = new List<JournalDetailsVM>();
 			foreach (var item in vm.SalesItemDetails)

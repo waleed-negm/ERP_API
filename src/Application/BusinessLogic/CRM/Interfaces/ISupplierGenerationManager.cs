@@ -1,10 +1,11 @@
-﻿using Application.Common.DTOs;
+using Application.BusinessLogic.CRM.ViewModel;
+using Application.Common.DTOs;
 
 namespace Application.BusinessLogic.CRM.Interfaces
 {
 	public interface ISupplierGenerationManager
 	{
 		Task<ResponseDto> GetAllAsync();
-		Task<ResponseDto> AddAsync(SupplierDto model);
+		Task<ResponseDto> AddAsync(ContactCreatingViewModel model);
 	}
 }

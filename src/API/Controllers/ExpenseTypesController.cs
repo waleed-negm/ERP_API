@@ -1,4 +1,4 @@
-using Application.BusinessLogic.PurchasesModule.Model;
+using Domain.Entities;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -103,7 +103,7 @@ namespace API.Controllers
 			return Ok(expenseType);
 		}
 
-		private bool ExpenseTypeExists(int id)
+		private bool ExpenseTypeExists(long id)
 		{
 			return _context.expenseTypes.Any(e => e.Id == id);
 		}

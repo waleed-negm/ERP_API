@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Application.BusinessLogic.CRM.ViewModel
 {
@@ -16,7 +16,7 @@ namespace Application.BusinessLogic.CRM.ViewModel
 		[StringLength(50), DataType(DataType.EmailAddress)]
 		public string Email { get; set; }
 
-		public string AccNum { get; set; }
+		public string? SupplierAccNum { get; set; }
 		public bool CreateAccount { get; set; }
 	}
 }

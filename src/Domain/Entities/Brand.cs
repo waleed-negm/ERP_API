@@ -1,12 +1,10 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using Domain.Entities.common;
 
-namespace Application.BusinessLogic.CurrentAssetModules.Inventory.Model.Settings
+namespace Domain.Entities
 {
-	[Table("Finance_CurrentAsset_Inventory_Settings_Brand")]
-	public class Brand
+	public class Brand : BaseModel
 	{
-		public int Id { get; set; }
 		[Required, StringLength(50)]
 		public string BrandName { get; set; }
 	}

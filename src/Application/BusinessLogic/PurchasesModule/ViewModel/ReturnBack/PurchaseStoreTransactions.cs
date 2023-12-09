@@ -1,8 +1,8 @@
-﻿namespace Application.BusinessLogic.PurchasesModule.ViewModel.ReturnBack
+namespace Application.BusinessLogic.PurchasesModule.ViewModel.ReturnBack
 {
 	public class PurchaseStoreTransactions
 	{
-		public int StoreItemId { get; set; }
+		public long StoreItemId { get; set; }
 		public string StoreItemName { get; set; }
 		public decimal QTY { get; set; }
 		public decimal UnitPrice { get; set; }

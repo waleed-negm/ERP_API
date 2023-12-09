@@ -1,17 +1,11 @@
-using Application.BusinessLogic.CRM.Model;
-using Application.BusinessLogic.ERPSettings.Model;
-using Application.BusinessLogic.GeneralLedgerModule.AccountCharts.Model;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Domain.Entities.common;
 
-namespace Application.BusinessLogic.CurrentAssetModules.ChecksModule.Model
+namespace Domain.Entities
 {
-	[Table("Finance_CurrentAsset_Checks")]
-	public class Check
+	public class Check : BaseModel
 	{
-		public int Id { get; set; }
-
-
 		[Required, StringLength(255)]
 		public string ChkNum { get; set; }
 
@@ -19,44 +13,42 @@ namespace Application.BusinessLogic.CurrentAssetModules.ChecksModule.Model
 		public DateTime DueDate { get; set; }
 
 		[Required]
-		public int CurrencyId { get; set; }
-
 		[ForeignKey("CurrencyId")]
-		public Currency Currency { get; set; }
-
+		public long CurrencyId { get; set; }
+		public virtual Currency Currency { get; set; }
 
 		[Required, Range(0, 9999999999999999.99)]
 		[Column(TypeName = "decimal(18,2)")]
 		public decimal AmountLocal { get; set; }
 
-
 		[Required, Range(0, 9999999999999999.99)]
 		[Column(TypeName = "decimal(18,2)")]
 		public decimal AmountForgin { get; set; }
-		public int ContactId { get; set; }
 
 		[ForeignKey("ContactId")]
-		public Contacts Contact { get; set; }
+		public long ContactId { get; set; }
+		public virtual Contacts Contact { get; set; }
+
 		[StringLength(255)]
 		public string OrginalBank { get; set; }
-		// Collection Part
 
+		// Collection Part
 		[Range(0, 9999999999999999.99)]
 		[Column(TypeName = "decimal(18,2)")]
 		public decimal Paid { get; set; }
-
 
 		[Range(0, 9999999999999999.99)]
 		[Column(TypeName = "decimal(18,2)")]
 		public decimal UnPaid { get; set; }
 
-		public int CheckStatusId { get; set; }
-		[ForeignKey("CheckStatusId")]
-		public CheckStatus CheckStatus { get; set; }
 
-		public int CheckLocationId { get; set; }
+		[ForeignKey("CheckStatusId")]
+		public long CheckStatusId { get; set; }
+		public virtual CheckStatus CheckStatus { get; set; }
+
 		[ForeignKey("CheckLocationId")]
-		public CheckLocation CheckLocation { get; set; }
+		public long CheckLocationId { get; set; }
+		public virtual CheckLocation CheckLocation { get; set; }
 
 		// Current Bank
 		[StringLength(50)]
@@ -65,9 +57,9 @@ namespace Application.BusinessLogic.CurrentAssetModules.ChecksModule.Model
 		[ForeignKey("BankAccNum")]
 		public AccountChart BankAcc { get; set; }
 
-		public int HafzaId { get; set; }
 		[ForeignKey("HafzaId")]
-		public CheckHafza CheckHafza { get; set; }
+		public long HafzaId { get; set; }
+		public virtual CheckHafza CheckHafza { get; set; }
 
 	}
 }

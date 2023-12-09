@@ -1,17 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using Domain.Entities.common;
 
-namespace Application.BusinessLogic.CurrentAssetModules.ChecksModule.Model
+namespace Domain.Entities
 {
-	[Table("Finance_CurrentAsset_CheckStatus")]
-
-	public class CheckStatus
+	public class CheckStatus : BaseModel
 	{
-		public int Id { get; set; }
 		[Required, StringLength(255)]
 		public string CheckStatusEN { get; set; }
+
 		[Required, StringLength(255)]
 		public string CheckStatusAR { get; set; }
+
 		public bool IsDefault { get; set; }
 	}
 }

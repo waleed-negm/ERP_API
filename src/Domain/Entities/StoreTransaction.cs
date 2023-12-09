@@ -1,36 +1,35 @@
-using Application.BusinessLogic.PurchasesModule.Model;
-using Application.BusinessLogic.SalesModule.Model;
+using Domain.Entities.common;
 using Domain.Enums;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Application.BusinessLogic.CurrentAssetModules.Inventory.Model.Main
+namespace Domain.Entities
 {
-	[Table("Finance_CurrentAsset_Inventory_Main_StoreTransaction")]
-
-	public class StoreTransaction
+	public class StoreTransaction : BaseModel
 	{
-		public int Id { get; set; }
-		public int StoreItemId { get; set; }
+		public long StoreItemId { get; set; }
+
 		[ForeignKey("StoreItemId")]
 		public StoreItem StoreItem { get; set; }
+
 		public StoreTransType StoreTransType { get; set; }
+
 		[Column(TypeName = "decimal(18,2)")]
 		public decimal Qty { get; set; }
+
 		[Column(TypeName = "decimal(18,2)")]
 		public decimal UnitPrice { get; set; }
-		public int PurchaseId { get; set; }
+
+		public long PurchaseId { get; set; }
+
 		[ForeignKey("PurchaseId")]
 		public Purchase PurchaseDetails { get; set; }
 
 		[Column(TypeName = "decimal(18,2)")]
 		public decimal QtyBalanceAfter { get; set; }
 
+		public long InvoiceNum { get; set; }
 
-		[StringLength(6)]
-		public string InvoiceNum { get; set; }
 		[ForeignKey("InvoiceNum")]
 		public Invoices Invoice { get; set; }
-
 	}
 }

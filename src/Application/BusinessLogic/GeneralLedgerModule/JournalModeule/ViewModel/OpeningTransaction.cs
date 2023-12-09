@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using Domain.Enums;
 
 namespace Application.BusinessLogic.GeneralLedgerModule.JournalModeule.ViewModel
@@ -9,7 +9,7 @@ namespace Application.BusinessLogic.GeneralLedgerModule.JournalModeule.ViewModel
 		{
 			TransactionDetails = new List<OpeningTransactionDetails>();
 		}
-		public int CurrentFinaicialPeriodId { get; set; }
+		public long CurrentFinaicialPeriodId { get; set; }
 		[Required]
 		public string TransDate { get; set; }
 		[Required]

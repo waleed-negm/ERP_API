@@ -1,10 +1,10 @@
-using Application.BusinessLogic.SalesModule.Model;
 using Application.BusinessLogic.SalesModule.ViewModel;
 using Application.Models;
 using AutoMapper;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore.Storage;
 using Infrastructure.Persistence.Extenstions;
+using Domain.Entities;
 
 namespace Application.BusinessLogic.SalesModule.Service
 {
@@ -95,7 +95,7 @@ namespace Application.BusinessLogic.SalesModule.Service
 
 		}
 
-		private string NewInvoice(SalesContainer vm)
+		private long NewInvoice(SalesContainer vm)
 		{
 			var invoice = new Invoices();
 			var inv = CreateNewInvoiceNum();
@@ -117,10 +117,10 @@ namespace Application.BusinessLogic.SalesModule.Service
 		{
 			//_db.Invoices.Where(x=> x.InvoiceDate.Year == invoicedate.Year).Max(x=>x.InvoiceCount)
 
-			int i = _db.Invoices.Count() == 0 ? 1 : _db.Invoices.Max(x => x.InvoiceCount) + 1;
+			long i = _db.Invoices.Count() == 0 ? 1 : _db.Invoices.Max(x => x.InvoiceCount) + 1;
 			return new InvoiceNum()
 			{
-				InvNum = i.ToString("000000"),
+				InvNum = i,
 				LastId = i
 			};
 
@@ -128,8 +128,8 @@ namespace Application.BusinessLogic.SalesModule.Service
 
 		private class InvoiceNum
 		{
-			public string InvNum { get; set; }
-			public int LastId { get; set; }
+			public long InvNum { get; set; }
+			public long LastId { get; set; }
 		}
 
 	}

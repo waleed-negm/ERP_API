@@ -1,5 +1,5 @@
-using Application.BusinessLogic.CRM.Model;
 using Application.BusinessLogic.PurchasesModule.Interfaces;
+using Domain.Entities;
 using Infrastructure.Persistence;
 
 namespace Application.BusinessLogic.PurchasesModule.Services
@@ -25,7 +25,7 @@ namespace Application.BusinessLogic.PurchasesModule.Services
 
 		}
 
-		public void ManageSupplierBalanceInCurrency(int SupplierId, string AccNum, int CurrencyId, decimal Amount, bool Plus)
+		public void ManageSupplierBalanceInCurrency(long SupplierId, string AccNum, long CurrencyId, decimal Amount, bool Plus)
 		{
 			var SupplierInCurrency = _db.ContactBalanceInCurrency.Where(x => x.ContactId == SupplierId && x.AccNum == AccNum
 															  && x.CurrencyId == CurrencyId).ToList();
@@ -38,7 +38,7 @@ namespace Application.BusinessLogic.PurchasesModule.Services
 		}
 
 
-		public void AddNewBalanceInCurrency(int SupplierId, string AccNum, int CurrencyId, decimal Amount)
+		public void AddNewBalanceInCurrency(long SupplierId, string AccNum, long CurrencyId, decimal Amount)
 		{
 			_db.ContactBalanceInCurrency.Add(new ContactBalanceInCurrency()
 			{
@@ -51,7 +51,7 @@ namespace Application.BusinessLogic.PurchasesModule.Services
 		}
 
 
-		public void UpdateBalanceInCurrency(int SupplierId, string AccNum, int CurrencyId, decimal Amount, bool Plus)
+		public void UpdateBalanceInCurrency(long SupplierId, string AccNum, long CurrencyId, decimal Amount, bool Plus)
 		{
 			var SupplierInCurrency = _db.ContactBalanceInCurrency.Where(x => x.ContactId == SupplierId && x.AccNum == AccNum
 															  && x.CurrencyId == CurrencyId).FirstOrDefault();

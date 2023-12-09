@@ -1,5 +1,3 @@
-using Application.BusinessLogic.CRM.Model;
-using Application.BusinessLogic.ERPSettings.Model;
 using Application.BusinessLogic.GeneralLedgerModule.JournalModeule.Interfaces;
 using Application.BusinessLogic.GeneralLedgerModule.JournalModeule.ViewModel;
 using Application.BusinessLogic.PurchasesModule.Interfaces;
@@ -7,6 +5,7 @@ using Application.BusinessLogic.PurchasesModule.ViewModel;
 using Application.BusinessLogic.PurchasesModule.ViewModel.Expenses;
 using Application.BusinessLogic.PurchasesModule.ViewModel.ReturnBack;
 using Application.Common.Interfaces;
+using Domain.Entities;
 using Domain.Enums;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Http;

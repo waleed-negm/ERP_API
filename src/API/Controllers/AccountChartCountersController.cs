@@ -1,11 +1,11 @@
-using Application.BusinessLogic.GeneralLedgerModule.AccountCharts.Model;
+using Domain.Entities;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-	[Route("api/[controller]/[action]")]
+	[Route("api/[controller]")]
 	[ApiController]
 	public class AccountChartCountersController : Controller
 	{
@@ -24,7 +24,7 @@ namespace API.Controllers
 		}
 
 		// GET: GLArea/AccountChartCounters/Details/5
-		[HttpGet]
+		[HttpGet("Details/{id}")]
 		public async Task<IActionResult> Details(int? id)
 		{
 			if (id == null)
@@ -59,26 +59,26 @@ namespace API.Controllers
 		}
 
 		// GET: GLArea/AccountChartCounters/Edit/5
-		[HttpPut]
-		public async Task<IActionResult> Edit(int? id)
-		{
-			if (id == null)
-			{
-				return NotFound();
-			}
+		//[HttpPut]
+		//public async Task<IActionResult> Edit(int? id)
+		//{
+		//	if (id == null)
+		//	{
+		//		return NotFound();
+		//	}
 
-			var accountChartCounter = await _context.AccountChartCounter.FindAsync(id);
-			if (accountChartCounter == null)
-			{
-				return NotFound();
-			}
-			return Ok(accountChartCounter);
-		}
+		//	var accountChartCounter = await _context.AccountChartCounter.FindAsync(id);
+		//	if (accountChartCounter == null)
+		//	{
+		//		return NotFound();
+		//	}
+		//	return Ok(accountChartCounter);
+		//}
 
 		// POST: GLArea/AccountChartCounters/Edit/5
 		// To protect from overposting attacks, enable the specific properties you want to bind to, for 
 		// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-		[HttpPost]
+		[HttpPut]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Edit(int id, [Bind("Id,AccountType,AccountCategory,ParentAccNum,Count,BalanceSheet,IncomeStatement")] AccountChartCounter accountChartCounter)
 		{
@@ -111,7 +111,7 @@ namespace API.Controllers
 		}
 
 		// POST: GLArea/AccountChartCounters/Delete/5
-		[HttpPost, ActionName("Delete")]
+		[HttpDelete]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> DeleteConfirmed(int id)
 		{
@@ -122,7 +122,7 @@ namespace API.Controllers
 			return Ok(accountChartCounter);
 		}
 
-		private bool AccountChartCounterExists(int id)
+		private bool AccountChartCounterExists(long id)
 		{
 			return _context.AccountChartCounter.Any(e => e.Id == id);
 		}

@@ -1,7 +1,7 @@
 using Application.BusinessLogic.GeneralLedgerModule.AccountCharts.Interfaces;
-using Application.BusinessLogic.GeneralLedgerModule.AccountCharts.Model;
 using Application.BusinessLogic.GeneralLedgerModule.AccountCharts.ViewModel;
 using AutoMapper;
+using Domain.Entities;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 

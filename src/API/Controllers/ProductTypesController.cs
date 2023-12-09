@@ -1,4 +1,4 @@
-using Application.BusinessLogic.CurrentAssetModules.Inventory.Model.Settings;
+using Domain.Entities;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -104,7 +104,7 @@ namespace API.Controllers
 			return Ok(productType);
 		}
 
-		private bool ProductTypeExists(int id)
+		private bool ProductTypeExists(long id)
 		{
 			return _context.ProductTypes.Any(e => e.Id == id);
 		}

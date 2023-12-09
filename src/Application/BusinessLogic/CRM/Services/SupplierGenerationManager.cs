@@ -1,9 +1,10 @@
 using Application.BusinessLogic.CRM.Interfaces;
-using Application.BusinessLogic.CRM.Model;
+using Application.BusinessLogic.CRM.ViewModel;
 using Application.BusinessLogic.GeneralLedgerModule.AccountCharts.Interfaces;
 using Application.BusinessLogic.GeneralLedgerModule.AccountCharts.ViewModel;
 using Application.Common.DTOs;
 using AutoMapper;
+using Domain.Entities;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,21 +23,31 @@ namespace Application.BusinessLogic.CRM.Services
 			_accountGenerator = accountGenerator;
 		}
 
-		public new async Task<ResponseDto> GetAllAsync() =>
-			new ResponseDto()
+		public async Task<ResponseDto> GetAllAsync()
+		{
+			var suppliers = await _db.Contacts.Where(x => x != null && x.IsSupplier).ToListAsync();
+			return new ResponseDto()
 			{
-				Body = _mapper.Map<List<SupplierDto>>(await _db.Contacts.Where(x => x.IsSupplier == true).ToListAsync()),
+				Body = suppliers,
 				Status = true,
 				message = "تم تسجيل البيانات بنجاح"
 			};
-
-		public async Task<ResponseDto> AddAsync(SupplierDto model)
+		}
+		public async Task<ResponseDto> AddAsync(ContactCreatingViewModel model)
 		{
 			using (var transaction = _db.Database.BeginTransaction())
 			{
 				try
 				{
-					var NewSupplier = _mapper.Map<Contacts>(model);
+					Contacts NewSupplier = new()
+					{
+						Name = model.Name,
+						NameAR = model.NameAR,
+						Phone1 = model.Phone1,
+						Phone2 = model.Phone2,
+						Email = model.Email,
+						IsSupplier = true,
+					};
 					NewSupplier.IsSupplier = true;
 					//if (model.CreateAccount)
 					{
@@ -53,10 +64,10 @@ namespace Application.BusinessLogic.CRM.Services
 					transaction.Commit();
 					return new ResponseDto() { Status = true, Body = _mapper.Map<SupplierDto>(NewSupplier), message = "تم تسجيل البيانات بنجاح" };
 				}
-				catch
+				catch (Exception ex)
 				{
 					transaction.Rollback();
-					return new ResponseDto() { Status = false, message = "خطأ في تسجيل البيانات" };
+					return new ResponseDto() { Status = false, message = "خطأ في تسجيل البيانات", Body = ex };
 				}
 			}
 

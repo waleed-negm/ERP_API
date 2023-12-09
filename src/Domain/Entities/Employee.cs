@@ -1,20 +1,25 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using Domain.Entities.common;
 
 namespace Domain.Entities
 {
-	[Table("HR_Employee")]
-	public class Employee
+	public class Employee : BaseModel
 	{
-		public int Id { get; set; }
 		public string Name { get; set; }
+
 		public string Phone { get; set; }
+
 		public string Title { get; set; }
-		public int DepartmentId { get; set; }
+
+		public long DepartmentId { get; set; }
+
 		[ForeignKey("DepartmentId")]
 		public Department Department { get; set; }
+
 		public decimal BasicSalary { get; set; }
+
 		public decimal InsuranceSalary { get; set; }
 
-		public string StaffAdvanceAccNum { get; set; }
+		public string? StaffAdvanceAccNum { get; set; }
 	}
 }

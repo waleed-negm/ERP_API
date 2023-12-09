@@ -19,12 +19,12 @@ namespace Application.BusinessLogic.GeneralLedgerModule.AccountCharts.ViewModel
 
 		[Required(ErrorMessage = "برجاء اختيار العملة")]
 		[Display(Name = "العملة")]
-		//[Remote(action: "VerifyCurrecny", controller: "AccountChart", areaName: "GLArea", AdditionalFields = nameof(AccNum))]
+		//[Remote(action: "VerifyCurrecny", controller: "AccountChart", areaName: "GLArea", AdditionalFields = nameof(SupplierAccNum))]
 		public int CurrencyId { get; set; }
 
 		[Required(ErrorMessage = "برجاء اختيار الفرع")]
 		[Display(Name = "الفرع")]
-		//[Remote(action: "VerifyBranch", controller: "AccountChart", areaName: "GLArea", AdditionalFields = nameof(AccNum))]
+		//[Remote(action: "VerifyBranch", controller: "AccountChart", areaName: "GLArea", AdditionalFields = nameof(SupplierAccNum))]
 		public int BranchId { get; set; }
 
 		public bool IsActive { get; set; }

@@ -1,7 +1,7 @@
 using Application.BusinessLogic.CurrentAssetModules.Inventory.Interfaces;
-using Application.BusinessLogic.CurrentAssetModules.Inventory.Model.Main;
 using Application.BusinessLogic.CurrentAssetModules.Inventory.ViewModel;
 using AutoMapper;
+using Domain.Entities;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 

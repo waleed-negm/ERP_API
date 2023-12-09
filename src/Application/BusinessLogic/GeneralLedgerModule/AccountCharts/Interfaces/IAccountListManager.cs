@@ -1,5 +1,5 @@
-﻿using Application.BusinessLogic.GeneralLedgerModule.AccountCharts.Model;
-using Application.BusinessLogic.GeneralLedgerModule.AccountCharts.ViewModel;
+﻿using Application.BusinessLogic.GeneralLedgerModule.AccountCharts.ViewModel;
+using Domain.Entities;
 
 namespace Application.BusinessLogic.GeneralLedgerModule.AccountCharts.Interfaces
 {

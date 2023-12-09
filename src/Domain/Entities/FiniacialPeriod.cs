@@ -1,16 +1,17 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using Domain.Entities.common;
 
-namespace Application.BusinessLogic.GeneralLedgerModule.AccountCharts.Model
+namespace Domain.Entities
 {
-	[Table("Finance_GL_FiniacialPeriod")]
-	public class FiniacialPeriod
+	public class FiniacialPeriod : BaseModel
 	{
-		public int Id { get; set; }
 		[Required, StringLength(50)]
 		public string YearName { get; set; }
-		public string StartDate { get; set; }
-		public string EndDate { get; set; }
+
+		public string? StartDate { get; set; }
+
+		public string? EndDate { get; set; }
+
 		public bool IsActive { get; set; }
 	}
 }

@@ -18,7 +18,7 @@ namespace Application.BusinessLogic.CurrentAssetModules.Inventory.Services
 		{
 			var Accounts = new StoreAccountsHelper();
 
-			// Store AccNum
+			// Store SupplierAccNum
 			var storeAcc = new CreateAccountVM();
 			storeAcc.AccountName = "Store- " + vm.Name;
 			storeAcc.AccountNameAr = "مخزون- " + vm.NameAr;

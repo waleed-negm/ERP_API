@@ -1,13 +1,12 @@
-using Application.BusinessLogic.ERPSettings.Model;
+using Domain.Entities.common;
 using Domain.Enums;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Application.BusinessLogic.GeneralLedgerModule.AccountCharts.Model
+namespace Domain.Entities
 {
-	[Table("Finance_GL_AccountChart")]
-	public class AccountChart
+	public class AccountChart : BaseModel
 	{
 		[Key, StringLength(50)]
 		public string AccNum { get; set; }
@@ -18,29 +17,24 @@ namespace Application.BusinessLogic.GeneralLedgerModule.AccountCharts.Model
 		[StringLength(150)]
 		public string AccountNameAr { get; set; }
 
-		public int AccTypeId { get; set; }
-
-
 		[ForeignKey("AccTypeId")]
-		public AccountChartCounter AccType { get; set; }
+		public long AccTypeId { get; set; }
+		public virtual AccountChartCounter AccType { get; set; }
 
 		public AccountNatureEnum AccountNature { get; set; }
 
 		[Column(TypeName = "decimal(18,2)")]
 		public decimal Balance { get; set; }
 
-
 		[Column(TypeName = "decimal(18,2)")]
-		public decimal StartingBalance { get; set; }
-
+		public decimal? StartingBalance { get; set; }
 
 		public bool IsParent { get; set; }
 
 		[Required]
-		public int CurrencyId { get; set; }
-
 		[ForeignKey("CurrencyId")]
-		public Currency Currency { get; set; }
+		public long CurrencyId { get; set; }
+		public virtual Currency Currency { get; set; }
 
 		[StringLength(50)]
 		public string ParentAcNum { get; set; }
@@ -48,9 +42,8 @@ namespace Application.BusinessLogic.GeneralLedgerModule.AccountCharts.Model
 		[DefaultValue(true)]
 		public bool IsActive { get; set; }
 
-		public int BranchId { get; set; }
-
 		[ForeignKey("BranchId")]
-		public Branch Branch { get; set; }
+		public long BranchId { get; set; }
+		public virtual Branch Branch { get; set; }
 	}
 }

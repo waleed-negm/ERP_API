@@ -1,7 +1,4 @@
-using Application.BusinessLogic.CurrentAssetModules.Inventory.Model.Main;
-using Application.BusinessLogic.ERPSettings.Model;
 using Application.BusinessLogic.PurchasesModule.Interfaces;
-using Application.BusinessLogic.PurchasesModule.Model;
 using Application.BusinessLogic.PurchasesModule.ViewModel;
 using Application.BusinessLogic.PurchasesModule.ViewModel.ReturnBack;
 using AutoMapper;
@@ -10,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Infrastructure.Persistence.Extenstions;
 using Domain.Enums;
 using Microsoft.AspNetCore.Http;
+using Domain.Entities;
 
 namespace Application.BusinessLogic.PurchasesModule.Services
 {

@@ -1,4 +1,3 @@
-using Application.BusinessLogic.CurrentLiabilitiesModules.NotesPayableModule.Model;
 using Application.BusinessLogic.CurrentLiabilitiesModules.NotesPayableModule.ViewModel;
 using Application.BusinessLogic.GeneralLedgerModule.JournalModeule.Interfaces;
 using Application.BusinessLogic.PurchasesModule.ViewModel;
@@ -8,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Infrastructure.Persistence.Extenstions;
 using Application.BusinessLogic.GeneralLedgerModule.JournalModeule.ViewModel;
 using Domain.Enums;
+using Domain.Entities;
 
 namespace Application.BusinessLogic.CurrentLiabilitiesModules.NotesPayableModule.Services
 {

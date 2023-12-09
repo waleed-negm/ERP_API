@@ -1,4 +1,4 @@
-﻿using Domain.Enums;
+using Domain.Enums;
 
 namespace Application.BusinessLogic.GeneralLedgerModule.JournalModeule.ViewModel
 {
@@ -11,6 +11,6 @@ namespace Application.BusinessLogic.GeneralLedgerModule.JournalModeule.ViewModel
 		public decimal Credit { get; set; }
 		public decimal UsedRate { get; set; }
 		public string CurrecnyAbbr { get; set; }
-		public int CurrencyId { get; set; }
+		public long CurrencyId { get; set; }
 	}
 }

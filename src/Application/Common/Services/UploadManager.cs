@@ -1,7 +1,7 @@
 using Application.Common.Interfaces;
 using Microsoft.AspNetCore.Http;
 
-namespace Application.Services
+namespace Application.Common.Services
 {
 	public class UploadManager : IUploadManager
 	{

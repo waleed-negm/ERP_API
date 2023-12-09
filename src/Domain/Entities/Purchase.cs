@@ -1,32 +1,38 @@
-using Application.BusinessLogic.CRM.Model;
-using Application.BusinessLogic.ERPSettings.Model;
 using System.ComponentModel.DataAnnotations.Schema;
+using Domain.Entities.common;
 
-namespace Application.BusinessLogic.PurchasesModule.Model
+namespace Domain.Entities
 {
-	[Table("Finance_Supplier_Purchase")]
-
-	public class Purchase
+	public class Purchase : BaseModel
 	{
-		public int Id { get; set; }
-		public int SupplierId { get; set; }
+		public long SupplierId { get; set; }
+
 		[ForeignKey("SupplierId")]
 		public Contacts SupplierDetails { get; set; }
+
 		[Column(TypeName = "Date")]
 		public DateTime PurchaseDate { get; set; }
+
 		[Column(TypeName = "decimal(18,2)")]
 		public decimal TotalAmount { get; set; }
+
 		public bool IsVAT { get; set; }
+
 		[Column(TypeName = "decimal(18,2)")]
 		public decimal VATAmount { get; set; }
+
 		[Column(TypeName = "decimal(18,2)")]
 		public decimal TotalAmountWithVAT { get; set; }
+
 		public bool IsFullyPaid { get; set; }
+
 		[Column(TypeName = "decimal(18,2)")]
 		public decimal Paid { get; set; }
+
 		public string InvoiceNum { get; set; }
 
-		public int CurrencyId { get; set; }
+		public long CurrencyId { get; set; }
+
 		[ForeignKey("CurrencyId")]
 		public Currency Currency { get; set; }
 	}

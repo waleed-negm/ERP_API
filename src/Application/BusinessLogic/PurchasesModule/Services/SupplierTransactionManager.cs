@@ -1,8 +1,7 @@
-using Application.BusinessLogic.CRM.Model;
 using Application.BusinessLogic.PurchasesModule.Interfaces;
-using Application.BusinessLogic.PurchasesModule.Model;
 using Application.BusinessLogic.PurchasesModule.ViewModel;
 using Application.BusinessLogic.PurchasesModule.ViewModel.Expenses;
+using Domain.Entities;
 using Domain.Enums;
 using Infrastructure.Persistence;
 using Infrastructure.Persistence.Extenstions;
@@ -18,7 +17,7 @@ namespace Application.BusinessLogic.PurchasesModule.Services
 			_db = db;
 		}
 
-		public void PurchaseSupplierTrans(PurchaseContainer vm, int purchaseId, string SupplierAccNum, string TransId, decimal BalanceAfter)
+		public void PurchaseSupplierTrans(PurchaseContainer vm, long purchaseId, string SupplierAccNum, string TransId, decimal BalanceAfter)
 		{
 			var trans = new SupplierTransaction();
 			trans.SupplierId = vm.SupplierData.SupplierId;
@@ -64,7 +63,7 @@ namespace Application.BusinessLogic.PurchasesModule.Services
 			_db.SaveChanges();
 		}
 
-		public void SupplierReturnTrans(Contacts Supplier, decimal LocalAmount, int CurrencyId, string TransId, decimal BalanceAfter)
+		public void SupplierReturnTrans(Contacts Supplier, decimal LocalAmount, long CurrencyId, string TransId, decimal BalanceAfter)
 		{
 			var trans = new SupplierTransaction();
 			trans.SupplierId = Supplier.Id;

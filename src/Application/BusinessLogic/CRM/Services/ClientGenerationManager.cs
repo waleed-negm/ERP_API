@@ -1,9 +1,9 @@
-using Application.BusinessLogic.CRM.Model;
 using Application.BusinessLogic.CRM.ViewModel;
 using Application.BusinessLogic.GeneralLedgerModule.AccountCharts.Interfaces;
 using Application.BusinessLogic.GeneralLedgerModule.AccountCharts.ViewModel;
 using Application.Models;
 using AutoMapper;
+using Domain.Entities;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore.Storage;
 

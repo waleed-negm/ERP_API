@@ -1,8 +1,8 @@
-﻿namespace Application.BusinessLogic.SalesModule.ViewModel.Payment
+namespace Application.BusinessLogic.SalesModule.ViewModel.Payment
 {
 	public class ClientBalanceDetails
 	{
-		public int CurrencyId { get; set; }
+		public long CurrencyId { get; set; }
 		public decimal Amount { get; set; }
 		public decimal LocalAmount { get; set; }
 		public decimal Rate { get; set; }

@@ -1,17 +1,18 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Domain.Entities.common;
 using Domain.Enums;
 
-namespace Application.BusinessLogic.GeneralLedgerModule.JournalModeule.Model
+namespace Domain.Entities
 {
-	[Table("Finance_GL_Journal")]
-	public class Journal
+	public class Journal : BaseModel
 	{
 		[Key, Required, StringLength(15)]
 		public string TransId { get; set; }
 
 		[Required]
 		public DateTimeOffset EntryDate { get; set; }
+
 		[Column(TypeName = "Date")]
 		public DateTime TransDate { get; set; }
 
@@ -20,8 +21,7 @@ namespace Application.BusinessLogic.GeneralLedgerModule.JournalModeule.Model
 
 		public string DocName { get; set; }
 
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public int TransCount { get; set; }
+		public long TransCount { get; set; }
 
 		public SystemModulesEnum SystemModule { get; set; }
 

@@ -7,15 +7,15 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-builder.Services.AddCors(options => options.AddPolicy("AllowAll", builder => builder.WithOrigins("http://localhost:4200", "http://localhost:881", "http://192.168.1.111:881").AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
+builder.Services.AddCors(options => options.AddPolicy("AllowAll", builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), builder =>
 {
 	_ = builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
 }));
+
 builder.Services.AddControllers();//.AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 builder.Services.AddEndpointsApiExplorer();
-
 builder.Services.AddSwaggerGen(
 options =>
 {
@@ -47,6 +47,8 @@ options =>
 	});
 }
 );
+
+
 builder.Services.AddServices();
 builder.Services.AddAuthentication(options =>
 {

@@ -1,7 +1,6 @@
-using Application.BusinessLogic.CRM.Model;
-using Application.BusinessLogic.SalesModule.Model;
 using Application.BusinessLogic.SalesModule.ViewModel;
 using Application.BusinessLogic.SalesModule.ViewModel.Payment;
+using Domain.Entities;
 using Domain.Enums;
 using Infrastructure.Persistence;
 using Infrastructure.Persistence.Extenstions;
@@ -17,8 +16,7 @@ namespace Application.BusinessLogic.SalesModule.Service
 			_db = db;
 		}
 
-		public void ClientSalesTransaction(SalesContainer vm, Contacts ClientData
-			, string InvoiceNum, string TransId)
+		public void ClientSalesTransaction(SalesContainer vm, Contacts ClientData, long InvoiceNum, string TransId)
 		{
 			var CT = new ClientTransaction();
 			CT.InvoiceNum = InvoiceNum;

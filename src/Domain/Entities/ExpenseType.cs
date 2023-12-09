@@ -1,12 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using Domain.Entities.common;
 
-namespace Application.BusinessLogic.PurchasesModule.Model
+namespace Domain.Entities
 {
-	[Table("Finance_Expense_ExpenseType")]
-	public class ExpenseType
+	public class ExpenseType : BaseModel
 	{
-		public int Id { get; set; }
 		[Required, StringLength(75)]
 		public string ExpenseTypeName { get; set; }
 	}

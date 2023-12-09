@@ -1,23 +1,22 @@
-using Application.BusinessLogic.CurrentAssetModules.ChecksModule.Model;
 using Application.BusinessLogic.CurrentAssetModules.ChecksModule.ViewModel.CheckInBank;
 using Application.BusinessLogic.CurrentAssetModules.ChecksModule.ViewModel.ChecksInSafe;
-using Application.BusinessLogic.ERPSettings.Model;
-using Application.BusinessLogic.GeneralLedgerModule.JournalModeule.Services;
 using Application.BusinessLogic.SalesModule.ViewModel.Payment;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Persistence.Extenstions;
 using Application.BusinessLogic.GeneralLedgerModule.JournalModeule.ViewModel;
 using Domain.Enums;
+using Application.BusinessLogic.GeneralLedgerModule.JournalModeule.Interfaces;
+using Domain.Entities;
 
 namespace Application.BusinessLogic.CurrentAssetModules.ChecksModule.Services
 {
 	public class NRManager
 	{
-		private readonly JournalManager _journal;
+		private readonly IJournalManager _journal;
 		private readonly ApplicationDbContext _db;
 
-		public NRManager(ApplicationDbContext db, JournalManager journal)
+		public NRManager(ApplicationDbContext db, IJournalManager journal)
 		{
 			_journal = journal;
 			_db = db;

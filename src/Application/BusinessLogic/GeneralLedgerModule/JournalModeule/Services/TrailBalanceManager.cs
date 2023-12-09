@@ -1,5 +1,5 @@
-using Application.BusinessLogic.GeneralLedgerModule.AccountCharts.Model;
 using Application.BusinessLogic.GeneralLedgerModule.JournalModeule.ViewModel.TrailBalance;
+using Domain.Entities;
 using Domain.Enums;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;

@@ -1,4 +1,4 @@
-using Application.BusinessLogic.CurrentAssetModules.Inventory.Model.Settings;
+using Domain.Entities;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -104,7 +104,7 @@ namespace API.Controllers
 			return Ok(unitMeasure);
 		}
 
-		private bool UnitMeasureExists(int id)
+		private bool UnitMeasureExists(long id)
 		{
 			return _context.UnitMeasures.Any(e => e.Id == id);
 		}

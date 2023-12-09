@@ -1,5 +1,5 @@
-﻿using Application.BusinessLogic.CurrentAssetModules.Inventory.Model.Main;
-using Application.BusinessLogic.CurrentAssetModules.Inventory.ViewModel;
+﻿using Application.BusinessLogic.CurrentAssetModules.Inventory.ViewModel;
+using Domain.Entities;
 
 namespace Application.BusinessLogic.CurrentAssetModules.Inventory.Interfaces
 {

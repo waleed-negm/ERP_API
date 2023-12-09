@@ -1,4 +1,4 @@
-﻿namespace Application.BusinessLogic.CurrentLiabilitiesModules.NotesPayableModule.ViewModel
+namespace Application.BusinessLogic.CurrentLiabilitiesModules.NotesPayableModule.ViewModel
 {
 	public class NotesPayableCreationVM
 	{
@@ -13,7 +13,7 @@
 
 		public decimal AmountForgin { get; set; }
 
-		public int CurrencyId { get; set; }
+		public long CurrencyId { get; set; }
 
 		public string BankAccountNum { get; set; }
 

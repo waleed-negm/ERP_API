@@ -1,5 +1,6 @@
 using Application.BusinessLogic.CurrentLiabilitiesModules.NotesPayableModule.Services;
 using Application.BusinessLogic.CurrentLiabilitiesModules.NotesPayableModule.ViewModel;
+using Application.BusinessLogic.PurchasesModule.Interfaces;
 using Application.BusinessLogic.PurchasesModule.ViewModel;
 using Domain.Enums;
 using Infrastructure.Persistence;
@@ -10,13 +11,13 @@ namespace Application.BusinessLogic.PurchasesModule.Services
 	public class SupplierPaymentsManager
 	{
 		private readonly ApplicationDbContext _db;
-		private readonly SupplierBalanceManager _supplierBalanceManager;
-		private readonly SupplierJournalsManager _supplierJournalsManager;
-		private readonly SupplierTransactionManager _supplierTransactionManager;
+		private readonly ISupplierBalanceManager _supplierBalanceManager;
+		private readonly ISupplierJournalsManager _supplierJournalsManager;
+		private readonly ISupplierTransactionManager _supplierTransactionManager;
 		private readonly NotesPayableManager _notesPayableManager;
 
-		public SupplierPaymentsManager(ApplicationDbContext db, SupplierBalanceManager supplierBalanceManager
-			, SupplierJournalsManager supplierJournalsManager, SupplierTransactionManager supplierTransactionManager
+		public SupplierPaymentsManager(ApplicationDbContext db, ISupplierBalanceManager supplierBalanceManager
+			, ISupplierJournalsManager supplierJournalsManager, ISupplierTransactionManager supplierTransactionManager
 			, NotesPayableManager notesPayableManager)
 		{
 			_db = db;

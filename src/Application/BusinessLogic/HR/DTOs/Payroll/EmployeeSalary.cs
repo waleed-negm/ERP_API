@@ -1,8 +1,8 @@
-﻿namespace Application.BusinessLogic.HR.DTOs.Payroll
+namespace Application.BusinessLogic.HR.DTOs.Payroll
 {
 	public class EmployeeSalary
 	{
-		public int EmployeeId { get; set; }
+		public long EmployeeId { get; set; }
 		public string Name { get; set; }
 		public decimal BasicSalary { get; set; }
 		public decimal Allowonces { get; set; }

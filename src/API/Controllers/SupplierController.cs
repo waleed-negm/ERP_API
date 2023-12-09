@@ -1,8 +1,8 @@
 using Application.BusinessLogic.CRM.Interfaces;
+using Application.BusinessLogic.CRM.ViewModel;
 using Application.BusinessLogic.PurchasesModule.Interfaces;
 using Application.BusinessLogic.PurchasesModule.Services;
 using Application.Common.DTOs;
-using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -14,150 +14,144 @@ namespace API.Controllers
 		private readonly ISupplierGenerationManager _supplierGenerationManager;
 		private readonly IPurchaseManager _purchaseManager;
 		private readonly SupplierPaymentsManager _supplierPaymentsManager;
+		//private readonly ApplicationDbContext _db;
 
-		public ApplicationDbContext _db { get; }
-
-		public SupplierController(ISupplierGenerationManager supplierGenerationManager,
-						IPurchaseManager purchaseManager, ApplicationDbContext db,
-						SupplierPaymentsManager supplierPaymentsManager)
+		//public SupplierController(ISupplierGenerationManager supplierGenerationManager, ApplicationDbContext db, IPurchaseManager purchaseManager, SupplierPaymentsManager supplierPaymentsManager)
+		public SupplierController(ISupplierGenerationManager supplierGenerationManager)
 		{
 			_supplierGenerationManager = supplierGenerationManager;
-			_purchaseManager = purchaseManager;
-			_supplierPaymentsManager = supplierPaymentsManager;
-			_db = db;
+			//_purchaseManager = purchaseManager;
+			//_supplierPaymentsManager = supplierPaymentsManager;
+			//_db = db;
 		}
 		[HttpGet]
 		public async Task<IActionResult> Index()
 		{
 			ResponseDto result = await _supplierGenerationManager.GetAllAsync();
-			if (result.Status) return Ok(result);
-			else return BadRequest(result);
+			if (result.Status)
+				return Ok(result);
+			else
+				return BadRequest(result);
 		}
 		[HttpPost]
-		public async Task<IActionResult> Create(SupplierDto model)
+		public async Task<IActionResult> Create(ContactCreatingViewModel model)
 		{
-			if (!ModelState.IsValid) return BadRequest(ModelState);
+			if (!ModelState.IsValid)
+				return BadRequest(ModelState);
 			ResponseDto result = await _supplierGenerationManager.AddAsync(model);
-			if (result.Status) return Ok(result);
-			else return BadRequest(result);
+			if (result.Status)
+				return Ok(result);
+			else
+				return BadRequest(result);
 		}
 
+		//[HttpGet("PurchaseIncovices")]
 		//public IActionResult PurchaseIncovices()
 		//{
-		//    var vm = _db.Purchases.Include(x => x.SupplierDetails).Include(x => x.Currency).ToList();
-		//    return Ok(vm);
+		//	var vm = _db.Purchases.Include(x => x.SupplierDetails).Include(x => x.Currency).ToList();
+		//	return Ok(vm);
 		//}
 
+		//[HttpGet("ReturnBack/{id}")]
 		//public IActionResult ReturnBack(int Id)
 		//{
-		//    var vm = _purchaseManager.GetPurchaseData(Id);
-		//    return Ok(vm);
+		//	var vm = _purchaseManager.GetPurchaseData(Id);
+		//	return Ok(vm);
 		//}
 
-		//public JsonResult ReturnPurchase([FromBody] PurchaseReturnBackContainer vm)
+		//[HttpPost("ReturnPurchase")]
+		//public IActionResult ReturnPurchase([FromBody] PurchaseReturnBackContainer vm)
 		//{
 
-		//    return Json
-		//               (new { newLocation = "/Home/Index/" });
+		//	return Ok(new { newLocation = "/Home/Index/" });
 		//}
 
-		//[HttpPost]
-		//[AutoValidateAntiforgeryToken]
-		//public IActionResult Create(ContactCreatingViewModel supplier)
-		//{
-		//    if (ModelState.IsValid)
-		//    {
-		//        _supplierGenerationManager.AddNewSupplier(supplier);
-		//        return RedirectToAction(nameof(this.Index));
-		//    }
-		//    return Ok(supplier);
-		//}
-
-
+		//[HttpGet("NewPurchase")]
 		//public IActionResult NewPurchase(int id)
 		//{
-		//    var vm = _purchaseManager.NewPurchase(id);
-		//    vm.SaveURL = "/Expenditure/Supplier/SavePurchase";
-		//    return Ok(vm);
+		//	var vm = _purchaseManager.NewPurchase(id);
+		//	vm.SaveURL = "/Expenditure/Supplier/SavePurchase";
+		//	return Ok(vm);
 		//}
 
-
-		//public JsonResult GetItemBalance(int id)
+		//[HttpGet("GetItemBalance/{id}")]
+		//public IActionResult GetItemBalance(int id)
 		//{
-		//    var currentqty = _db.StoreItems.Find(id).Qty;
+		//	var currentqty = _db.StoreItems.Find(id).Qty;
 
-		//    return Json(new { CurrentQty = currentqty });
+		//	return Ok(new { CurrentQty = currentqty });
 		//}
 
-
-		//public JsonResult SavePurchase([FromForm] IFormFile InvoiceFile)
+		//[HttpPost("SavePurchase")]
+		//public IActionResult SavePurchase([FromForm] IFormFile InvoiceFile)
 		//{
-		//    List<string> errors = new List<string>();
-		//    var body = Request.Form["vm"];
-		//    var model = JsonConvert.DeserializeObject<PurchaseContainer>(body);
+		//	List<string> errors = new List<string>();
+		//	var body = Request.Form["vm"];
+		//	var model = JsonConvert.DeserializeObject<PurchaseContainer>(body);
 
-		//    if (ModelState.IsValid)
-		//    {
-		//        try
-		//        {
-		//            _purchaseManager.SavePurchase(model, InvoiceFile);
-		//            return Json
-		//                (new { newLocation = "/Home/Index/" });
-		//        }
-		//        catch (Exception ex)
-		//        {
-		//            errors.Add(ex.Message);
-		//            errors.Add("Please Contact System Admin");
-		//            return Json(new { errors = errors });
-		//        }
+		//	if (ModelState.IsValid)
+		//	{
+		//		try
+		//		{
+		//			_purchaseManager.SavePurchase(model, InvoiceFile);
+		//			return Ok
+		//				(new { newLocation = "/Home/Index/" });
+		//		}
+		//		catch (Exception ex)
+		//		{
+		//			errors.Add(ex.Message);
+		//			errors.Add("Please Contact System Admin");
+		//			return Ok(new { errors });
+		//		}
 
-		//    }
-		//    else
-		//    {
-		//        errors.AddRange(ModelState.Values
-		//                           .SelectMany(x => x.Errors)
-		//                           .Select(x => x.ErrorMessage));
+		//	}
+		//	else
+		//	{
+		//		errors.AddRange(ModelState.Values
+		//						   .SelectMany(x => x.Errors)
+		//						   .Select(x => x.ErrorMessage));
 
-		//        return Json(new { errors = errors });
-		//    }
+		//		return Ok(new { errors });
+		//	}
 		//}
 
+		//[HttpGet("SupplierPayment/{id}")]
 		//public IActionResult SupplierPayment(int id)
 		//{
-		//    var vm = _supplierPaymentsManager.NewPayment(id);
-		//    return Ok(vm);
+		//	var vm = _supplierPaymentsManager.NewPayment(id);
+		//	return Ok(vm);
 		//}
 
 		////SaveSupplierPayment
 
-
-		//public JsonResult SaveSupplierPayment([FromBody] SupplierPaymentContainer vm)
+		//[HttpPost("SaveSupplierPayment")]
+		//public IActionResult SaveSupplierPayment([FromBody] SupplierPaymentContainer vm)
 		//{
-		//    List<string> errors = new List<string>();
-		//    if (ModelState.IsValid)
-		//    {
-		//        try
-		//        {
-		//            _supplierPaymentsManager.SaveSupplierPayment(vm);
-		//            return Json
-		//                (new { newLocation = "/Home/Index/" });
-		//        }
-		//        catch (Exception ex)
-		//        {
-		//            errors.Add(ex.Message);
-		//            errors.Add("Please Contact System Admin");
-		//            return Json(new { errors = errors });
-		//        }
+		//	List<string> errors = new List<string>();
+		//	if (ModelState.IsValid)
+		//	{
+		//		try
+		//		{
+		//			_supplierPaymentsManager.SaveSupplierPayment(vm);
+		//			return Ok
+		//				(new { newLocation = "/Home/Index/" });
+		//		}
+		//		catch (Exception ex)
+		//		{
+		//			errors.Add(ex.Message);
+		//			errors.Add("Please Contact System Admin");
+		//			return Ok(new { errors });
+		//		}
 
-		//    }
-		//    else
-		//    {
-		//        errors.AddRange(ModelState.Values
-		//                           .SelectMany(x => x.Errors)
-		//                           .Select(x => x.ErrorMessage));
+		//	}
+		//	else
+		//	{
+		//		errors.AddRange(ModelState.Values
+		//						   .SelectMany(x => x.Errors)
+		//						   .Select(x => x.ErrorMessage));
 
-		//        return Json(new { errors = errors });
-		//    }
+		//		return Ok(new { errors });
+		//	}
 		//}
 
 	}

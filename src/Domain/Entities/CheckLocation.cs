@@ -1,15 +1,13 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using Domain.Entities.common;
 
-namespace Application.BusinessLogic.CurrentAssetModules.ChecksModule.Model
+namespace Domain.Entities
 {
-	[Table("Finance_CurrentAsset_CheckLocation")]
-
-	public class CheckLocation
+	public class CheckLocation : BaseModel
 	{
-		public int Id { get; set; }
 		[Required, StringLength(255)]
 		public string CheckLocationEN { get; set; }
+
 		[Required, StringLength(255)]
 		public string CheckLocationAR { get; set; }
 

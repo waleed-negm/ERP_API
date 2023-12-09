@@ -1,9 +1,9 @@
-using Application.BusinessLogic.CurrentLiabilitiesModules.NotesPayableModule.Services;
 using Application.BusinessLogic.GeneralLedgerModule.AccountCharts.Interfaces;
 using Application.BusinessLogic.GeneralLedgerModule.AccountCharts.ViewModel;
-using Application.BusinessLogic.PurchasesModule.Model;
+using Application.BusinessLogic.PurchasesModule.Interfaces;
 using Application.BusinessLogic.PurchasesModule.ViewModel.Expenses;
 using AutoMapper;
+using Domain.Entities;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,15 +14,13 @@ namespace Application.BusinessLogic.PurchasesModule.Services
 		private readonly ApplicationDbContext _db;
 		private readonly IAccountGenerator _accountGenerator;
 		private readonly IMapper _mapper;
-		private readonly SupplierBalanceManager _supplierBalanceManager;
-		private readonly SupplierJournalsManager _supplierJournalsManager;
-		private readonly SupplierTransactionManager _supplierTransactionManager;
-		private readonly NotesPayableManager _notesPayableManager;
+		private readonly ISupplierBalanceManager _supplierBalanceManager;
+		private readonly ISupplierJournalsManager _supplierJournalsManager;
+		private readonly ISupplierTransactionManager _supplierTransactionManager;
 
 		public ExpensesManager(ApplicationDbContext db, IAccountGenerator accountGenerator,
-			IMapper mapper, SupplierBalanceManager supplierBalanceManager
-			, SupplierJournalsManager supplierJournalsManager, SupplierTransactionManager supplierTransactionManager
-			, NotesPayableManager notesPayableManager)
+			IMapper mapper, ISupplierBalanceManager supplierBalanceManager
+			, ISupplierJournalsManager supplierJournalsManager, ISupplierTransactionManager supplierTransactionManager)
 		{
 			_db = db;
 			_accountGenerator = accountGenerator;
@@ -30,7 +28,6 @@ namespace Application.BusinessLogic.PurchasesModule.Services
 			_supplierBalanceManager = supplierBalanceManager;
 			_supplierJournalsManager = supplierJournalsManager;
 			_supplierTransactionManager = supplierTransactionManager;
-			_notesPayableManager = notesPayableManager;
 		}
 
 		public List<ExpenseItem> GetAllExpenseItems() =>

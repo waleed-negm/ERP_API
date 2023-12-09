@@ -1,10 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using Application.BusinessLogic.GeneralLedgerModule.AccountCharts.Model;
-using Application.BusinessLogic.GeneralLedgerModule.JournalModeule.Model;
 using Application.BusinessLogic.GeneralLedgerModule.JournalModeule.Interfaces;
 using Application.BusinessLogic.GeneralLedgerModule.JournalModeule.ViewModel;
 using Infrastructure.Persistence;
 using Domain.Enums;
+using Domain.Entities;
 
 namespace Application.BusinessLogic.GeneralLedgerModule.JournalModeule.Services
 {

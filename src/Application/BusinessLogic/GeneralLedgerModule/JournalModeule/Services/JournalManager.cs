@@ -1,6 +1,6 @@
 using Application.BusinessLogic.GeneralLedgerModule.JournalModeule.Interfaces;
-using Application.BusinessLogic.GeneralLedgerModule.JournalModeule.Model;
 using Application.BusinessLogic.GeneralLedgerModule.JournalModeule.ViewModel;
+using Domain.Entities;
 using Domain.Enums;
 using Infrastructure.Persistence;
 
