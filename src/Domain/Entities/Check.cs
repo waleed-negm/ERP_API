@@ -9,7 +9,7 @@ namespace Domain.Entities
 		[Required, StringLength(255)]
 		public string ChkNum { get; set; }
 
-		[Column(TypeName = "Date")]
+		
 		public DateTime DueDate { get; set; }
 
 		[Required]
@@ -18,11 +18,11 @@ namespace Domain.Entities
 		public virtual Currency Currency { get; set; }
 
 		[Required, Range(0, 9999999999999999.99)]
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal AmountLocal { get; set; }
 
 		[Required, Range(0, 9999999999999999.99)]
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal AmountForgin { get; set; }
 
 		[ForeignKey("ContactId")]
@@ -34,11 +34,11 @@ namespace Domain.Entities
 
 		// Collection Part
 		[Range(0, 9999999999999999.99)]
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal Paid { get; set; }
 
 		[Range(0, 9999999999999999.99)]
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal UnPaid { get; set; }
 
 

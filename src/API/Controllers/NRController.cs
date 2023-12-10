@@ -22,14 +22,14 @@ namespace API.Controllers
 		}
 
 		[HttpPost]
-		public JsonResult MoveToBank([FromBody] CheckInSafeContainer vm)
+		public async Task<JsonResult> MoveToBankAsync([FromBody] CheckInSafeContainer vm)
 		{
 			if (ModelState.IsValid)
 			{
 				List<string> errors = new List<string>();
 				try
 				{
-					_nRManager.MoveToBankAsync(vm);
+					await _nRManager.MoveToBankAsync(vm);
 
 					return Json(new
 					{
@@ -62,14 +62,14 @@ namespace API.Controllers
 		}
 
 		[HttpPost]
-		public JsonResult CollectChecks([FromBody] CheckInBankContainer vm)
+		public async Task<JsonResult> CollectChecksAsync([FromBody] CheckInBankContainer vm)
 		{
 			if (ModelState.IsValid)
 			{
 				List<string> errors = new List<string>();
 				try
 				{
-					_nRManager.CollectCheckAsync(vm);
+					await _nRManager.CollectCheckAsync(vm);
 
 					return Json(new
 					{

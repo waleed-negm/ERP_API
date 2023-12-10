@@ -23,10 +23,9 @@ namespace Domain.Entities
 
 		public AccountNatureEnum AccountNature { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
 		public decimal Balance { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+
 		public decimal? StartingBalance { get; set; }
 
 		public bool IsParent { get; set; }

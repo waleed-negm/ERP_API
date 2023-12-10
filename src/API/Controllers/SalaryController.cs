@@ -41,9 +41,9 @@ namespace API.Controllers
 		}
 
 		[HttpPost]
-		public JsonResult SaveBatch([FromBody] BatchContainer vm)
+		public async Task<JsonResult> SaveBatchAsync([FromBody] BatchContainer vm)
 		{
-			_salaryBatchManager.SaveSalaryAsync(vm);
+			await _salaryBatchManager.SaveSalaryAsync(vm);
 			return Json(new { newLocation = "/Home/Index" });
 		}
 	}

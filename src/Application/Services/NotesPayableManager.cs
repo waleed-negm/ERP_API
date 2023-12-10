@@ -199,7 +199,7 @@ namespace Application.Services
 					SupplierId = np.SupplierId
 
 				};
-				SaveNewNPAsync(newCheck);
+				await SaveNewNPAsync(newCheck);
 				await SaveNewNPHistoryAsync(newCheck, TransId);
 			}
 			await _db.SaveChangesAsync();

@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Domain.Entities.common;
 using Domain.Enums;
 
@@ -11,9 +10,9 @@ namespace Domain.Entities
 		public string TransId { get; set; }
 
 		[Required]
-		public DateTimeOffset EntryDate { get; set; }
+		public DateTime EntryDate { get; set; }
 
-		[Column(TypeName = "Date")]
+
 		public DateTime TransDate { get; set; }
 
 		[Required]

@@ -13,7 +13,10 @@ namespace Infrastructure.Persistence
 	public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
 	{
 		private readonly IUserService _userService;
-		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IUserService userService) : base(options) { }
+		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IUserService userService) : base(options)
+		{
+			_userService = userService ?? throw new ArgumentNullException(nameof(userService));
+		}
 
 		#region entities
 		public DbSet<Department> Departments => Set<Department>();
@@ -106,7 +109,7 @@ namespace Infrastructure.Persistence
 			builder.Entity<AccountChart>().Property(a => a.Id).ValueGeneratedOnAdd();
 			builder.Entity<AccountChartCounter>().Property(a => a.Id).ValueGeneratedOnAdd();
 			builder.Entity<Journal>().Property(a => a.Id).ValueGeneratedOnAdd();
-			builder.Entity<Journal>().Property(a => a.TransCount).ValueGeneratedOnAdd();
+			//builder.Entity<Journal>().Property(a => a.TransCount).ValueGeneratedOnAdd();
 			builder.Entity<JournalDetails>().Property(a => a.Id).ValueGeneratedOnAdd();
 			builder.Entity<FiniacialPeriod>().Property(a => a.Id).ValueGeneratedOnAdd();
 			builder.Entity<HistoricalBalance>().Property(a => a.Id).ValueGeneratedOnAdd();
@@ -123,9 +126,9 @@ namespace Infrastructure.Persistence
 
 				foreach (var property in entityType.GetProperties())
 				{
-					if (property.ClrType == typeof(DateTime) || property.ClrType == typeof(DateTime?))
+					if (property.ClrType == typeof(decimal) || property.ClrType == typeof(decimal?))
 					{
-						property.SetColumnType("timestamp with time zone");
+						property.SetColumnType("decimal(18,2)");
 					}
 				}
 			}
@@ -145,11 +148,11 @@ namespace Infrastructure.Persistence
 				{
 					case EntityState.Added:
 						entry.Entity.CreatedAt = DateTime.UtcNow;
-						entry.Entity.CreatedById = _userService.UserId.ToString() ?? "Manual";
+						entry.Entity.CreatedById = _userService.UserIdExist ? _userService.UserId.ToString() : "Manual";
 						break;
 					case EntityState.Modified:
 						entry.Entity.UpdatedAt = DateTime.UtcNow;
-						entry.Entity.UpdatedById = _userService.UserId.ToString() ?? "Manual";
+						entry.Entity.UpdatedById = _userService.UserIdExist ? _userService.UserId.ToString() : "Manual";
 						break;
 				}
 			}

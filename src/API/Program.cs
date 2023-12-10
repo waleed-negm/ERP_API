@@ -4,10 +4,8 @@ using API.Filters;
 using Application.DIExtensions;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using Infrastructure.Persistence;
 using Infrastructure.DIExtensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -60,11 +58,11 @@ builder.Services.AddAuthentication(options =>
   });
 WebApplication app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-	var dataContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-	dataContext.Database.Migrate();
-}
+//using (var scope = app.Services.CreateScope())
+//{
+//var dataContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+//dataContext.Database.Migrate();
+//}
 if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
 {
 	app.UseSwagger();

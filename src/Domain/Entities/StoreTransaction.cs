@@ -13,10 +13,10 @@ namespace Domain.Entities
 
 		public StoreTransType StoreTransType { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal Qty { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal UnitPrice { get; set; }
 
 		public long PurchaseId { get; set; }
@@ -24,7 +24,7 @@ namespace Domain.Entities
 		[ForeignKey("PurchaseId")]
 		public Purchase PurchaseDetails { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal QtyBalanceAfter { get; set; }
 
 		public long InvoiceNum { get; set; }

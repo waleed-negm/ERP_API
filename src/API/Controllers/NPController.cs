@@ -23,25 +23,25 @@ namespace API.Controllers
 		}
 
 		[HttpPost]
-		public JsonResult CollectCheck([FromBody] NPDetails np)
+		public async Task<JsonResult> CollectCheckAsync([FromBody] NPDetails np)
 		{
-			_notesPayableManager.CollectNPAsync(np);
+			await _notesPayableManager.CollectNPAsync(np);
 			return Json
 						(new { newLocation = "/Home/Index/" });
 		}
 
 		[HttpPost]
-		public JsonResult MoveToCashCollection([FromBody] NPDetails np)
+		public async Task<JsonResult> MoveToCashCollectionAsync([FromBody] NPDetails np)
 		{
-			_notesPayableManager.MoveCheckToCashPaymentAsync(np);
+			await _notesPayableManager.MoveCheckToCashPaymentAsync(np);
 			return Json
 					   (new { newLocation = "/Home/Index/" });
 		}
 
 		[HttpPost]
-		public JsonResult CollectCashCollection([FromBody] NPContainer vm)
+		public async Task<JsonResult> CollectCashCollectionAsync([FromBody] NPContainer vm)
 		{
-			_notesPayableManager.CollectCashNPAsync(vm.SelectedNote, vm.PaymentDetails);
+			await _notesPayableManager.CollectCashNPAsync(vm.SelectedNote, vm.PaymentDetails);
 			return Json
 					   (new { newLocation = "/Home/Index/" });
 		}

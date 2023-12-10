@@ -14,7 +14,7 @@ namespace Domain.Entities
 
 		public DateTime ActionDate { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+
 		public decimal PaidAmount { get; set; }
 
 		public NotesPayableStatusEnum StatusAfterAction { get; set; }

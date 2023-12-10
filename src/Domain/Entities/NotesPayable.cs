@@ -15,11 +15,11 @@ namespace Domain.Entities
 		public DateTime DueDate { get; set; }
 
 		[Required, Range(0, 9999999999999999.99)]
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal AmountLocal { get; set; }
 
 		[Required, Range(0, 9999999999999999.99)]
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal AmountForgin { get; set; }
 
 		[Required]
@@ -38,7 +38,7 @@ namespace Domain.Entities
 		[ForeignKey("SupplierId")]
 		public Contacts Supplier { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal Paid { get; set; }
 
 		public NotesPayableStatusEnum CheckStatus { get; set; }

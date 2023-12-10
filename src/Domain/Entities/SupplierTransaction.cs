@@ -16,10 +16,10 @@ namespace Domain.Entities
 		[ForeignKey("PurchaseId")]
 		public Purchase PurchaseDetails { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal PaymentAmount { get; set; }
 
-		[Column(TypeName = "Date")]
+		
 		public DateTime PaymentDate { get; set; }
 
 		public long CurrencyId { get; set; }
@@ -39,7 +39,7 @@ namespace Domain.Entities
 		[ForeignKey("TransId")]
 		public Journal TransactionDetails { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal BalanceAfter { get; set; }
 
 	}

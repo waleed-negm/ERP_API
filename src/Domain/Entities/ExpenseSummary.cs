@@ -11,12 +11,12 @@ namespace Domain.Entities
 
 		public DateTime ExpenseDate { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+
 		public decimal Amount { get; set; }
 
 		public long CurrencyId { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+
 		public decimal LocalAmount { get; set; }
 
 		public long CostCenterId { get; set; }

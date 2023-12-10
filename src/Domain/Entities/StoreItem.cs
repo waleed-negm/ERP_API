@@ -31,10 +31,10 @@ namespace Domain.Entities
 		[ForeignKey("BrandId")]
 		public Brand Brand { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+
 		public decimal Qty { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+
 		public decimal Balance { get; set; }
 
 		public bool WithSN { get; set; }

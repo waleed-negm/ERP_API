@@ -24,11 +24,11 @@ namespace API.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Create(StoreItemCreationVM vm)
+		public async Task<IActionResult> CreateAsync(StoreItemCreationVM vm)
 		{
 			if (ModelState.IsValid)
 			{
-				_storeItemManager.CreateStoreItemAsync(vm);
+				await _storeItemManager.CreateStoreItemAsync(vm);
 				//return RedirectToAction(nameof(this.Index));
 			}
 			return Ok(vm);

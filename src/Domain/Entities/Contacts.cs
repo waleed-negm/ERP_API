@@ -32,7 +32,7 @@ namespace Domain.Entities
 		[ForeignKey("ClientAccNum")]
 		public AccountChart ClientAccountDetails { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal ClientBalance { get; set; }
 
 		public bool IsSupplier { get; set; }
@@ -43,7 +43,7 @@ namespace Domain.Entities
 		[ForeignKey("SupplierAccNum")]
 		public AccountChart SupplierAccountDetails { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal SupplierBalance { get; set; }
 
 	}

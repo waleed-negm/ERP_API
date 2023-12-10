@@ -28,11 +28,11 @@ namespace API.Controllers
 		}
 
 		[HttpPost]
-		public JsonResult SaveOpeningBalance([FromBody] OpeningTransaction vm)
+		public async Task<JsonResult> SaveOpeningBalanceAsync([FromBody] OpeningTransaction vm)
 		{
 			if (ModelState.IsValid)
 			{
-				_openingBalanceManager.SaveOpeningBalanceAsync(vm);
+				await _openingBalanceManager.SaveOpeningBalanceAsync(vm);
 				return Json(new { newLocation = "/GLArea/AccountChart/Index" });
 			}
 			else
@@ -59,11 +59,11 @@ namespace API.Controllers
 		}
 
 		[HttpPost]
-		public JsonResult SaveJournal([FromBody] JournalVM vm)
+		public async Task<JsonResult> SaveJournalAsync([FromBody] JournalVM vm)
 		{
 			if (ModelState.IsValid)
 			{
-				_journalManager.SaveJournalAsync(vm);
+				await _journalManager.SaveJournalAsync(vm);
 				return Json(new { newLocation = "/GLArea/AccountChart/Index" });
 			}
 			else

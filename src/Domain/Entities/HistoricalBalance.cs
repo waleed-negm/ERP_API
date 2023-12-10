@@ -16,10 +16,10 @@ namespace Domain.Entities
 
 		public AccountChart AccountDetails { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal Balance { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal UsedRate { get; set; }
 
 	}

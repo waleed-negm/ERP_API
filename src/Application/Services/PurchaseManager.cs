@@ -57,7 +57,7 @@ namespace Application.Services
 			//  Get TotalAmount With Local Currency
 			var LocalAmount = vm.PurchaseSummary.TotalAmountWithVAT * currency.Rate;
 			// Update With Balance in Currecny
-			_supplierBalanceManager.ManageSupplierBalanceInCurrency(Contact.Id, Contact.SupplierAccNum,
+			_supplierBalanceManager.ManageSupplierBalanceInCurrencyAsync(Contact.Id, Contact.SupplierAccNum,
 												currency.Id, vm.PurchaseSummary.TotalAmountWithVAT, true);
 			// Update Contact Balance
 			var BalanceAfter = await _supplierBalanceManager.UpdateSupplierBalanceAsync(Contact, LocalAmount, true);
@@ -135,7 +135,7 @@ namespace Application.Services
 			var BalanceAfter = await _supplierBalanceManager.UpdateSupplierBalanceAsync(Contact, TotalInLocal, false);
 
 			// Update With Balance in Currecny
-			_supplierBalanceManager.ManageSupplierBalanceInCurrency(Contact.Id, Contact.SupplierAccNum,
+			_supplierBalanceManager.ManageSupplierBalanceInCurrencyAsync(Contact.Id, Contact.SupplierAccNum,
 												vm.PurchaseDetails.CurrencyId, TotalReturnedAmount, false);
 			// Journal Transaction
 

@@ -47,7 +47,7 @@ namespace API.Controllers
 		}
 
 		[HttpPost]
-		public JsonResult SaveNewSale([FromBody] SalesContainer vm)
+		public async Task<JsonResult> SaveNewSaleAsync([FromBody] SalesContainer vm)
 		{
 			List<string> errors = new List<string>();
 
@@ -56,7 +56,7 @@ namespace API.Controllers
 			{
 				try
 				{
-					_salesManager.SaveNewSaleAsync(vm);
+					await _salesManager.SaveNewSaleAsync(vm);
 					return Json
 						(new { newLocation = "/Home/Index/" });
 				}
@@ -86,10 +86,10 @@ namespace API.Controllers
 		}
 
 		[HttpPost]
-		public JsonResult SaveClientPayment([FromBody] ClientPaymentContainer vm)
+		public async Task<JsonResult> SaveClientPaymentAsync([FromBody] ClientPaymentContainer vm)
 		{
 
-			_clientPayamentManager.SaveClientPaymentAsync(vm);
+			await _clientPayamentManager.SaveClientPaymentAsync(vm);
 			return Json(new { newLocation = "/Home/Index/" });
 
 		}

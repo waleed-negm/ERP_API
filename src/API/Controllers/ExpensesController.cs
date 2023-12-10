@@ -23,9 +23,9 @@ namespace API.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult Create(ExpenseCreationVM vm)
+		public async Task<IActionResult> CreateAsync(ExpenseCreationVM vm)
 		{
-			_expensesManager.AddNewExpenseItemAsync(vm);
+			await _expensesManager.AddNewExpenseItemAsync(vm);
 			//return RedirectToAction(nameof(this.Index));
 			return Ok();
 
@@ -40,9 +40,9 @@ namespace API.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult SaveExpenses([FromBody] ExpenseVM expense)
+		public async Task<IActionResult> SaveExpensesAsync([FromBody] ExpenseVM expense)
 		{
-			_expensesManager.SaveNewExpenseAsync(expense);
+			await _expensesManager.SaveNewExpenseAsync(expense);
 			return Json
 						(new { newLocation = "/Home/Index/" });
 		}

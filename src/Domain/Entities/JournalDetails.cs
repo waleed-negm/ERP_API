@@ -16,17 +16,17 @@ namespace Domain.Entities
 		[StringLength(15)]
 		public string AccNum { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+		
 		[Range(0, 9999999999999999.99)]
 		public decimal Amount { get; set; }
 
 		[Range(0, 9999999999999999.99)]
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal AmountLocal { get; set; }
 
 		public TransactionSidesEnum Side { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+		
 		[Range(0, 9999999999999999.99)]
 		public decimal BalanceAfter { get; set; }
 
@@ -36,7 +36,7 @@ namespace Domain.Entities
 		[ForeignKey("CurrencyId")]
 		public Currency Currency { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+		
 		[Range(0, 9999999999999999.99)]
 		public decimal UsedRate { get; set; }
 	}

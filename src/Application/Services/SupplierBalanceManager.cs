@@ -24,15 +24,15 @@ namespace Application.Services
 
 		}
 
-		public void ManageSupplierBalanceInCurrency(long SupplierId, string AccNum, long CurrencyId, decimal Amount, bool Plus)
+		public async Task ManageSupplierBalanceInCurrencyAsync(long SupplierId, string AccNum, long CurrencyId, decimal Amount, bool Plus)
 		{
 			var SupplierInCurrency = _db.ContactBalanceInCurrency.Where(x => x.ContactId == SupplierId && x.AccNum == AccNum
 															  && x.CurrencyId == CurrencyId).ToList();
 
 			if (SupplierInCurrency.Count > 0)
-				UpdateBalanceInCurrencyAsync(SupplierId, AccNum, CurrencyId, Amount, Plus);
+				await UpdateBalanceInCurrencyAsync(SupplierId, AccNum, CurrencyId, Amount, Plus);
 			else
-				AddNewBalanceInCurrencyAsync(SupplierId, AccNum, CurrencyId, Amount);
+				await AddNewBalanceInCurrencyAsync(SupplierId, AccNum, CurrencyId, Amount);
 
 		}
 

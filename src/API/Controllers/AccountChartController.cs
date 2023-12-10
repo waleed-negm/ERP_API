@@ -28,22 +28,22 @@ namespace API.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult CreateAccount(CreateAccountVM vm)
+		public async Task<IActionResult> CreateAccountAsync(CreateAccountVM vm)
 		{
 			if (ModelState.IsValid)
 			{
-				_accountGenerator.GenerateAccountAsync(vm);
+				await _accountGenerator.GenerateAccountAsync(vm);
 				//return RedirectToAction(nameof(this.Index));
 			}
 			return Ok(vm);
 		}
 
 		[HttpPost]
-		public IActionResult Edit(UpdateAccountVM account)
+		public async Task<IActionResult> EditAsync(UpdateAccountVM account)
 		{
 			if (ModelState.IsValid)
 			{
-				_accountListManager.UpdateAccountAsync(account);
+				await _accountListManager.UpdateAccountAsync(account);
 				//return RedirectToAction(nameof(this.Index));
 			}
 			return Ok(account);

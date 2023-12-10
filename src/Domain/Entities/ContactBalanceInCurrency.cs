@@ -19,7 +19,7 @@ namespace Domain.Entities
 		[StringLength(50)]
 		public string AccNum { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal Balance { get; set; }
 	}
 }

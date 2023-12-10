@@ -21,7 +21,7 @@ namespace Application.Services
 			// Create Jounral
 
 			var jr = new Journal();
-			var date = DateTimeOffset.Now;
+			var date = DateTime.Now;
 			var MaxCount = _db.Journal.Count() > 0 ? _db.Journal.Max(x => x.TransCount) + 1 : 1;
 
 			jr.TransId = date.Month.ToString() +

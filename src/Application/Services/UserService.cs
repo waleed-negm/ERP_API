@@ -12,7 +12,7 @@ namespace Application.Services
 			_httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
 		}
 
-		public ClaimsPrincipal CurrentClaims { get => _httpContextAccessor?.HttpContext?.User ?? throw new ArgumentNullException(nameof(_httpContextAccessor)); }
+		public ClaimsPrincipal CurrentClaims { get => _httpContextAccessor?.HttpContext?.User; }
 
 		public Guid UserId
 		{
@@ -27,7 +27,7 @@ namespace Application.Services
 		{
 			get
 			{
-				var id = CurrentClaims.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+				var id = CurrentClaims?.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 				return id is not null;
 			}
 		}

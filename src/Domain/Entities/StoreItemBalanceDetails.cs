@@ -15,10 +15,10 @@ namespace Domain.Entities
 
 		public StoreTransaction StoreTransaction { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal CurrentBalance { get; set; }
 
-		[Column(TypeName = "Date")]
+		
 		public DateTime ExpiryDate { get; set; }
 
 

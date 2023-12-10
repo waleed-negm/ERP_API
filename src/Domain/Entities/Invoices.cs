@@ -13,10 +13,10 @@ namespace Domain.Entities
 
 		public Contacts ContactDetails { get; set; }
 
-		[Column(TypeName = "Date")]
+		
 		public DateTime InvoiceDate { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal Amount { get; set; }
 
 		public long CurrencyId { get; set; }
@@ -25,10 +25,10 @@ namespace Domain.Entities
 
 		public bool IsVAT { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal VATAmount { get; set; }
 
-		[Column(TypeName = "decimal(18,2)")]
+		
 		public decimal TotalWithVAT { get; set; }
 
 	}
