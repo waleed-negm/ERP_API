@@ -1,5 +1,5 @@
-using Application.BusinessLogic.CurrentAssetModules.Inventory.Interfaces;
-using Application.BusinessLogic.CurrentAssetModules.Inventory.ViewModel;
+using Application.DTOs;
+using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -18,7 +18,7 @@ namespace API.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Index()
 		{
-			var StoreItems = await _storeItemManager.GetAllStoreItems();
+			var StoreItems = await _storeItemManager.GetAllStoreItemsAsync();
 			return Ok(StoreItems);
 		}
 
@@ -28,7 +28,7 @@ namespace API.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				_storeItemManager.CreateStoreItem(vm);
+				_storeItemManager.CreateStoreItemAsync(vm);
 				//return RedirectToAction(nameof(this.Index));
 			}
 			return Ok(vm);

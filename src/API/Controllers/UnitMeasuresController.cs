@@ -1,5 +1,5 @@
+using Application.Interfaces;
 using Domain.Entities;
-using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,9 +9,9 @@ namespace API.Controllers
 	[ApiController]
 	public class UnitMeasuresController : Controller
 	{
-		private readonly ApplicationDbContext _context;
+		private readonly IApplicationDbContext _context;
 
-		public UnitMeasuresController(ApplicationDbContext context)
+		public UnitMeasuresController(IApplicationDbContext context)
 		{
 			_context = context;
 		}
@@ -50,7 +50,7 @@ namespace API.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				_context.Add(unitMeasure);
+				_context.UnitMeasures.Add(unitMeasure);
 				await _context.SaveChangesAsync();
 				//return RedirectToAction(nameof(Index));
 			}
@@ -73,7 +73,7 @@ namespace API.Controllers
 			{
 				try
 				{
-					_context.Update(unitMeasure);
+					_context.UnitMeasures.Update(unitMeasure);
 					await _context.SaveChangesAsync();
 				}
 				catch (DbUpdateConcurrencyException)

@@ -1,5 +1,5 @@
+using Application.Interfaces;
 using Domain.Entities;
-using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,9 +9,9 @@ namespace API.Controllers
 	[ApiController]
 	public class ExpenseTypesController : Controller
 	{
-		private readonly ApplicationDbContext _context;
+		private readonly IApplicationDbContext _context;
 
-		public ExpenseTypesController(ApplicationDbContext context)
+		public ExpenseTypesController(IApplicationDbContext context)
 		{
 			_context = context;
 		}
@@ -49,7 +49,7 @@ namespace API.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				_context.Add(expenseType);
+				_context.expenseTypes.Add(expenseType);
 				await _context.SaveChangesAsync();
 				//return RedirectToAction(nameof(Index));
 			}
@@ -72,7 +72,7 @@ namespace API.Controllers
 			{
 				try
 				{
-					_context.Update(expenseType);
+					_context.expenseTypes.Update(expenseType);
 					await _context.SaveChangesAsync();
 				}
 				catch (DbUpdateConcurrencyException)

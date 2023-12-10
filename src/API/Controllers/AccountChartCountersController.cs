@@ -1,5 +1,5 @@
+using Application.Interfaces;
 using Domain.Entities;
-using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,9 +9,9 @@ namespace API.Controllers
 	[ApiController]
 	public class AccountChartCountersController : Controller
 	{
-		private readonly ApplicationDbContext _context;
+		private readonly IApplicationDbContext _context;
 
-		public AccountChartCountersController(ApplicationDbContext context)
+		public AccountChartCountersController(IApplicationDbContext context)
 		{
 			_context = context;
 		}
@@ -51,7 +51,7 @@ namespace API.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				_context.Add(accountChartCounter);
+				_context.AccountChartCounter.Add(accountChartCounter);
 				await _context.SaveChangesAsync();
 				//return RedirectToAction(nameof(Index));
 			}
@@ -91,7 +91,7 @@ namespace API.Controllers
 			{
 				try
 				{
-					_context.Update(accountChartCounter);
+					_context.AccountChartCounter.Update(accountChartCounter);
 					await _context.SaveChangesAsync();
 				}
 				catch (DbUpdateConcurrencyException)

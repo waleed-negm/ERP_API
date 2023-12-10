@@ -1,5 +1,5 @@
-using Application.BusinessLogic.GeneralLedgerModule.AccountCharts.Interfaces;
-using Application.BusinessLogic.GeneralLedgerModule.AccountCharts.ViewModel;
+using Application.DTOs;
+using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -28,24 +28,22 @@ namespace API.Controllers
 		}
 
 		[HttpPost]
-		[ValidateAntiForgeryToken]
 		public IActionResult CreateAccount(CreateAccountVM vm)
 		{
 			if (ModelState.IsValid)
 			{
-				_accountGenerator.GenerateAccount(vm);
+				_accountGenerator.GenerateAccountAsync(vm);
 				//return RedirectToAction(nameof(this.Index));
 			}
 			return Ok(vm);
 		}
 
 		[HttpPost]
-		[ValidateAntiForgeryToken]
 		public IActionResult Edit(UpdateAccountVM account)
 		{
 			if (ModelState.IsValid)
 			{
-				_accountListManager.UpdateAccount(account);
+				_accountListManager.UpdateAccountAsync(account);
 				//return RedirectToAction(nameof(this.Index));
 			}
 			return Ok(account);

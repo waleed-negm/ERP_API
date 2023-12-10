@@ -1,6 +1,5 @@
-using Application.BusinessLogic.GeneralLedgerModule.AccountCharts.Interfaces;
-using Application.BusinessLogic.GeneralLedgerModule.JournalModeule.Interfaces;
-using Application.BusinessLogic.GeneralLedgerModule.JournalModeule.ViewModel;
+using Application.DTOs;
+using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -33,7 +32,7 @@ namespace API.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				_openingBalanceManager.SaveOpeningBalance(vm);
+				_openingBalanceManager.SaveOpeningBalanceAsync(vm);
 				return Json(new { newLocation = "/GLArea/AccountChart/Index" });
 			}
 			else
@@ -42,11 +41,10 @@ namespace API.Controllers
 			}
 		}
 
-
 		[HttpPost]
 		public IActionResult CreateJounral()
 		{
-			return Ok(_journalManager.NewJournal());
+			return Ok(new JournalVM());
 		}
 
 		[HttpPost]
@@ -65,7 +63,7 @@ namespace API.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				_journalManager.SaveJournal(vm);
+				_journalManager.SaveJournalAsync(vm);
 				return Json(new { newLocation = "/GLArea/AccountChart/Index" });
 			}
 			else

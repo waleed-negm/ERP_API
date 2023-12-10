@@ -1,5 +1,5 @@
+using Application.Interfaces;
 using Domain.Entities;
-using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,9 +9,9 @@ namespace API.Controllers
 	[ApiController]
 	public class BrandsController : Controller
 	{
-		private readonly ApplicationDbContext _context;
+		private readonly IApplicationDbContext _context;
 
-		public BrandsController(ApplicationDbContext context)
+		public BrandsController(IApplicationDbContext context)
 		{
 			_context = context;
 		}
@@ -51,7 +51,7 @@ namespace API.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				_context.Add(brand);
+				_context.Brands.Add(brand);
 				await _context.SaveChangesAsync();
 				//return RedirectToAction(nameof(Index));
 			}
@@ -74,7 +74,7 @@ namespace API.Controllers
 			{
 				try
 				{
-					_context.Update(brand);
+					_context.Brands.Update(brand);
 					await _context.SaveChangesAsync();
 				}
 				catch (DbUpdateConcurrencyException)

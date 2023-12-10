@@ -1,5 +1,5 @@
-using Application.BusinessLogic.PurchasesModule.Services;
-using Application.BusinessLogic.PurchasesModule.ViewModel.Expenses;
+using Application.DTOs;
+using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -25,7 +25,7 @@ namespace API.Controllers
 		[HttpPost]
 		public IActionResult Create(ExpenseCreationVM vm)
 		{
-			_expensesManager.AddNewExpenseItem(vm);
+			_expensesManager.AddNewExpenseItemAsync(vm);
 			//return RedirectToAction(nameof(this.Index));
 			return Ok();
 
@@ -42,7 +42,7 @@ namespace API.Controllers
 		[HttpPost]
 		public IActionResult SaveExpenses([FromBody] ExpenseVM expense)
 		{
-			_expensesManager.SaveNewExpense(expense);
+			_expensesManager.SaveNewExpenseAsync(expense);
 			return Json
 						(new { newLocation = "/Home/Index/" });
 		}

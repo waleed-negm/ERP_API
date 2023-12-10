@@ -1,7 +1,7 @@
 using System.Diagnostics;
-using Application.BusinessLogic.HR.DTOs;
-using Application.BusinessLogic.HR.Services;
 using Application.Common.DTOs;
+using Application.DTOs;
+using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers

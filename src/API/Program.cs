@@ -1,55 +1,42 @@
-using API.Configuration;
+using API.DIExtensions;
+using API.Extensions;
+using API.Filters;
+using Application.DIExtensions;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Infrastructure.Persistence;
+using Infrastructure.DIExtensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using System.Text;
+using System.Text.Json.Serialization;
+using Application.Interfaces;
+using API.Middlewares;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options => options.AddPolicy("AllowAll", builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), builder =>
-{
-	_ = builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
-}));
+builder.Services.AddSQLServerDatabase(builder.Configuration);
+builder.Services.AddApplicationDependancies();
+builder.Services.AddApplicationConfiguration(builder.Configuration);
 
-builder.Services.AddControllers();//.AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+builder.Services.AddControllers(options => options.Filters.Add<ExceptionActionFilter>())
+	.AddFluentValidation(options =>
+	{
+		ValidatorOptions.Global.DefaultClassLevelCascadeMode = CascadeMode.Stop;
+		ValidatorOptions.Global.DefaultRuleLevelCascadeMode = CascadeMode.Stop;
+		options.RegisterValidatorsFromAssembly(typeof(DependanciesExtension).Assembly);
+	})
+	.ConfigureApiBehaviorOptions(options => options.InvalidModelStateResponseFactory = context => context.HandleInvalidRequest())
+	.AddJsonOptions(options =>
+	{
+		options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+	});
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(
-options =>
-{
-	options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-	{
-		Name = "Authorization",
-		Type = SecuritySchemeType.ApiKey,
-		Scheme = "Bearer",
-		BearerFormat = "JWT",
-		In = ParameterLocation.Header,
-		Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\""
-	});
+builder.Services.AddSwagger();
 
-	options.AddSecurityRequirement(new OpenApiSecurityRequirement
-	{
-		{
-			new OpenApiSecurityScheme
-			{
-				Reference = new OpenApiReference
-				{
-					Type = ReferenceType.SecurityScheme,
-					Id = "Bearer"
-				},
-				Name = "Bearer",
-				In = ParameterLocation.Header
-			},
-			new List<string>()
-		}
-	});
-}
-);
-
-
-builder.Services.AddServices();
 builder.Services.AddAuthentication(options =>
 {
 	options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -78,15 +65,46 @@ using (var scope = app.Services.CreateScope())
 	var dataContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 	dataContext.Database.Migrate();
 }
-app.UseSwagger();
-app.UseSwaggerUI();
-
+if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
+{
+	app.UseSwagger();
+	app.UseSwaggerUI();
+}
 app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseMiddleware<LogExceptionMiddlware>();
+app.UseMiddleware<LoggingMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseMiddleware<AuthorizationMiddleware>();
+void useStaticFiles(WebApplication app)
+{
+	string imagesFolder = Path.Combine(app.Environment.ContentRootPath, "staticFiles");
+	if (!Directory.Exists(imagesFolder))
+	{
+		Directory.CreateDirectory(imagesFolder);
+	}
+	app.UseStaticFiles(new StaticFileOptions()
+	{
+		FileProvider = new PhysicalFileProvider(imagesFolder),
+		RequestPath = new PathString("/staticFiles")
+	});
+}
+useStaticFiles(app);
+
+async void SeedData(IHost app)
+{
+	IServiceScopeFactory serviceScopeFactory = app.Services.GetService<IServiceScopeFactory>();
+	using (IServiceScope Scope = serviceScopeFactory.CreateScope())
+	{
+		IDataSeedingService service = Scope.ServiceProvider.GetService<IDataSeedingService>();
+		await service.SeedDataAsync();
+	}
+}
+SeedData(app);
 app.MapControllers();
+app.MapGet("/", async context => { await context.Response.WriteAsync("CORE SYNC API."); });
 app.Run();
 
 

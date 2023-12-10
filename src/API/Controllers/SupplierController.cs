@@ -1,8 +1,7 @@
-using Application.BusinessLogic.CRM.Interfaces;
-using Application.BusinessLogic.CRM.ViewModel;
-using Application.BusinessLogic.PurchasesModule.Interfaces;
-using Application.BusinessLogic.PurchasesModule.Services;
 using Application.Common.DTOs;
+using Application.DTOs;
+using Application.Interfaces;
+using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -14,9 +13,9 @@ namespace API.Controllers
 		private readonly ISupplierGenerationManager _supplierGenerationManager;
 		private readonly IPurchaseManager _purchaseManager;
 		private readonly SupplierPaymentsManager _supplierPaymentsManager;
-		//private readonly ApplicationDbContext _db;
+		//private readonly IApplicationDbContext _db;
 
-		//public SupplierController(ISupplierGenerationManager supplierGenerationManager, ApplicationDbContext db, IPurchaseManager purchaseManager, SupplierPaymentsManager supplierPaymentsManager)
+		//public SupplierController(ISupplierGenerationManager supplierGenerationManager, IApplicationDbContext db, IPurchaseManager purchaseManager, SupplierPaymentsManager supplierPaymentsManager)
 		public SupplierController(ISupplierGenerationManager supplierGenerationManager)
 		{
 			_supplierGenerationManager = supplierGenerationManager;

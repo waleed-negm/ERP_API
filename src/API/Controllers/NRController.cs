@@ -1,6 +1,5 @@
-using Application.BusinessLogic.CurrentAssetModules.ChecksModule.Services;
-using Application.BusinessLogic.CurrentAssetModules.ChecksModule.ViewModel.CheckInBank;
-using Application.BusinessLogic.CurrentAssetModules.ChecksModule.ViewModel.ChecksInSafe;
+using Application.DTOs;
+using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -30,7 +29,7 @@ namespace API.Controllers
 				List<string> errors = new List<string>();
 				try
 				{
-					_nRManager.MoveToBank(vm);
+					_nRManager.MoveToBankAsync(vm);
 
 					return Json(new
 					{
@@ -70,7 +69,7 @@ namespace API.Controllers
 				List<string> errors = new List<string>();
 				try
 				{
-					_nRManager.CollectCheck(vm);
+					_nRManager.CollectCheckAsync(vm);
 
 					return Json(new
 					{

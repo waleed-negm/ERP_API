@@ -1,9 +1,5 @@
-using Application.BusinessLogic.CRM.Services;
-using Application.BusinessLogic.CRM.ViewModel;
-using Application.BusinessLogic.SalesModule.Service;
-using Application.BusinessLogic.SalesModule.ViewModel;
-using Application.BusinessLogic.SalesModule.ViewModel.ClientStatment;
-using Application.BusinessLogic.SalesModule.ViewModel.Payment;
+using Application.DTOs;
+using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -36,23 +32,9 @@ namespace API.Controllers
 
 		[HttpPost]
 		[AutoValidateAntiforgeryToken]
-		public IActionResult Create(ContactCreatingViewModel client)
+		public async Task<IActionResult> CreateAsync(ContactCreatingViewModel client)
 		{
-			if (ModelState.IsValid)
-			{
-				var feedback = _clientGenerationManager.AddNewClient(client);
-
-				//if (feedback.Done)
-				//return RedirectToAction(nameof(this.Index));
-				//else
-				{
-					foreach (var item in feedback.Errors)
-					{
-						ModelState.AddModelError("error", item);
-					}
-					return Ok(client);
-				}
-			}
+			await _clientGenerationManager.AddNewClientAsync(client);
 			return Ok(client);
 		}
 
@@ -74,7 +56,7 @@ namespace API.Controllers
 			{
 				try
 				{
-					_salesManager.SaveNewSale(vm);
+					_salesManager.SaveNewSaleAsync(vm);
 					return Json
 						(new { newLocation = "/Home/Index/" });
 				}
@@ -107,7 +89,7 @@ namespace API.Controllers
 		public JsonResult SaveClientPayment([FromBody] ClientPaymentContainer vm)
 		{
 
-			_clientPayamentManager.SaveClientPayment(vm);
+			_clientPayamentManager.SaveClientPaymentAsync(vm);
 			return Json(new { newLocation = "/Home/Index/" });
 
 		}

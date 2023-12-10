@@ -1,4 +1,4 @@
-using Infrastructure.Persistence;
+using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -8,9 +8,9 @@ namespace API.Controllers
 	[ApiController]
 	public class ListController : Controller
 	{
-		private readonly ApplicationDbContext _db;
+		private readonly IApplicationDbContext _db;
 
-		public ListController(ApplicationDbContext db)
+		public ListController(IApplicationDbContext db)
 		{
 			_db = db;
 		}

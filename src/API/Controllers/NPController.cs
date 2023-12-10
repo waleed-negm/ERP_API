@@ -1,5 +1,5 @@
-using Application.BusinessLogic.CurrentLiabilitiesModules.NotesPayableModule.Services;
-using Application.BusinessLogic.CurrentLiabilitiesModules.NotesPayableModule.ViewModel;
+using Application.DTOs;
+using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -25,7 +25,7 @@ namespace API.Controllers
 		[HttpPost]
 		public JsonResult CollectCheck([FromBody] NPDetails np)
 		{
-			_notesPayableManager.CollectNP(np);
+			_notesPayableManager.CollectNPAsync(np);
 			return Json
 						(new { newLocation = "/Home/Index/" });
 		}
@@ -33,7 +33,7 @@ namespace API.Controllers
 		[HttpPost]
 		public JsonResult MoveToCashCollection([FromBody] NPDetails np)
 		{
-			_notesPayableManager.MoveCheckToCashPayment(np);
+			_notesPayableManager.MoveCheckToCashPaymentAsync(np);
 			return Json
 					   (new { newLocation = "/Home/Index/" });
 		}
@@ -41,7 +41,7 @@ namespace API.Controllers
 		[HttpPost]
 		public JsonResult CollectCashCollection([FromBody] NPContainer vm)
 		{
-			_notesPayableManager.CollectCashNP(vm.SelectedNote, vm.PaymentDetails);
+			_notesPayableManager.CollectCashNPAsync(vm.SelectedNote, vm.PaymentDetails);
 			return Json
 					   (new { newLocation = "/Home/Index/" });
 		}

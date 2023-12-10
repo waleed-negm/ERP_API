@@ -1,6 +1,6 @@
-using Application.BusinessLogic.HR.DTOs.Payroll;
-using Application.BusinessLogic.HR.Services;
-using Infrastructure.Persistence;
+using Application.DTOs;
+using Application.Interfaces;
+using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -10,9 +10,9 @@ namespace API.Controllers
 	public class SalaryController : Controller
 	{
 		private readonly SalaryBatchManager _salaryBatchManager;
-		private readonly ApplicationDbContext _db;
+		private readonly IApplicationDbContext _db;
 
-		public SalaryController(SalaryBatchManager salaryBatchManager, ApplicationDbContext db)
+		public SalaryController(SalaryBatchManager salaryBatchManager, IApplicationDbContext db)
 		{
 			_salaryBatchManager = salaryBatchManager;
 			_db = db;
@@ -43,7 +43,7 @@ namespace API.Controllers
 		[HttpPost]
 		public JsonResult SaveBatch([FromBody] BatchContainer vm)
 		{
-			_salaryBatchManager.SaveSalary(vm);
+			_salaryBatchManager.SaveSalaryAsync(vm);
 			return Json(new { newLocation = "/Home/Index" });
 		}
 	}

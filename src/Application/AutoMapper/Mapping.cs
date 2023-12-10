@@ -1,10 +1,4 @@
-using Application.BusinessLogic.CRM.ViewModel;
-using Application.BusinessLogic.CurrentAssetModules.Inventory.ViewModel;
-using Application.BusinessLogic.CurrentLiabilitiesModules.NotesPayableModule.ViewModel;
-using Application.BusinessLogic.GeneralLedgerModule.AccountCharts.ViewModel;
-using Application.BusinessLogic.PurchasesModule.ViewModel;
-using Application.BusinessLogic.PurchasesModule.ViewModel.Expenses;
-using Application.Common.DTOs;
+using Application.DTOs;
 using AutoMapper;
 using Domain.Entities;
 using Infrastructure.Persistence.Extenstions;
